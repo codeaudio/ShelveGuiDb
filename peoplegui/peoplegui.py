@@ -116,7 +116,6 @@ class Gui(Frame, Validator):
         self.master = Tk()
         self.master.title("all data")
         for i, v in enumerate(self.__db.items()):
-            print(i, v, 4)
             self.master.i = Entry(self.master, width=100)
             self.master.i.pack()
             self.entries[i] = self.master.i
