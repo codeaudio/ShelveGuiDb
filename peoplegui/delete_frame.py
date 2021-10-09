@@ -1,5 +1,6 @@
 from tkinter import Button, Tk, Entry
 
+from accessify import private
 from database import DataBase
 
 
@@ -7,8 +8,9 @@ class DeleteFrame(DataBase):
     def __init__(self, entries):
         self.entries = entries
 
+    @private
     def accept_buttons(self):
-        Button(self.master.delete, text="Yes", command=self.accept_delete).grid(row=3, column=0)
+        Button(self.master.delete, text="Yes", command=self._accept_delete).grid(row=3, column=0)
         Button(self.master.delete, text="No", command=self.master.destroy).grid(row=3, column=4)
 
     def delete_all(self):
@@ -18,7 +20,7 @@ class DeleteFrame(DataBase):
         self.master.delete.pack()
         self.accept_buttons()
 
-    def accept_delete(self):
+    def _accept_delete(self):
         self.open_shelve(self.shelvename)
         for key in self._db.keys():
             del self._db[key]
