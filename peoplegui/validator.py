@@ -4,8 +4,8 @@ from accessify import protected
 
 
 class Validator:
-    def __init__(self, entries):
-        self.entries = entries
+
+    entries = None
 
     @protected
     def _field_empty_validator(self, key, field):

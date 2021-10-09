@@ -11,11 +11,11 @@ from delete_frame import DeleteFrame
 from validator import Validator
 
 
-class Gui(Frame, Validator, DataBase):
+class Gui(Validator, DataBase):
     def __init__(self):
-        super().__init__()
-        self.master.title('gui')
         self.entries = {}
+        self.master = Frame().master
+        self.master.title('gui')
 
     def make_widgets(self):
         self.make_root_master_buttons()
