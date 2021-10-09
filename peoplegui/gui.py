@@ -2,6 +2,8 @@ import random
 from tkinter import *
 from tkinter.messagebox import showerror
 
+from accessify import private
+
 from class_person.person_start import Person
 from data_frame import DataFrame
 from database import DataBase
@@ -25,6 +27,7 @@ class Gui(Frame, Validator, DataBase):
             self.entries[label] = self.master.ent
         return self.master.mainloop()
 
+    @private
     def make_root_master_buttons(self):
         Button(self.master, text="Fetch", command=self.fetch_record).grid(row=5, column=0)
         Button(self.master, text="Update", command=self.update_record).grid(row=5, column=1)

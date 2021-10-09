@@ -9,7 +9,7 @@ class DeleteFrame(DataBase):
         self.entries = entries
 
     @private
-    def accept_buttons(self):
+    def __accept_buttons(self):
         Button(self.master.delete, text="Yes", command=self._accept_delete).grid(row=3, column=0)
         Button(self.master.delete, text="No", command=self.master.destroy).grid(row=3, column=4)
 
@@ -18,7 +18,7 @@ class DeleteFrame(DataBase):
         self.master.title("delete all")
         self.master.delete = Entry(self.master, width=100)
         self.master.delete.pack()
-        self.accept_buttons()
+        self.__accept_buttons()
 
     def _accept_delete(self):
         self.open_shelve(self.shelvename)
