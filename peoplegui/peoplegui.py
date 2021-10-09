@@ -102,10 +102,10 @@ class Gui(Frame, Validator):
     def delete_all(self):
         self.master = Tk()
         self.master.title("delete all")
-        self.master.d = Entry(self.master, width=100)
-        self.master.d.pack()
-        Button(self.master.d, text="Yes", command=self.accept_delete).grid(row=3, column=0)
-        Button(self.master.d, text="No", command=self.master.destroy).grid(row=3, column=4)
+        self.master.delete = Entry(self.master.delete, width=100)
+        self.master.delete.pack()
+        Button(self.master.delete, text="Yes", command=self.accept_delete).grid(row=3, column=0)
+        Button(self.master.delete, text="No", command=self.master.destroy).grid(row=3, column=4)
 
     def accept_delete(self):
         self.open_shelve(self.shelvename)
@@ -119,8 +119,8 @@ class Gui(Frame, Validator):
         self.master = Tk()
         self.master.title("all data")
         for i, v in enumerate(self.__db.items()):
-            self.master.i = Entry(self.master, width=100)
-            self.master.i.pack()
+            self.master.data = Entry(self.master, width=100)
+            self.master.data.pack()
             self.entries[i] = self.master.i
             self.entries[i].insert(i, {v[0]: {field: str(getattr(v[1], field)) for field in self.fieldnames}})
         self.close_shelve()
