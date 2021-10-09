@@ -35,8 +35,8 @@ class Gui(Frame, Validator, DataBase):
         Button(self.master, text="Delete", command=self.delete_record).grid(row=5, column=3)
         Button(self.master, text="Get data", command=DataFrame(self.entries).get_data).grid(row=0, column=3)
         Button(self.master, text="Generate", command=self.generate).grid(row=1, column=3)
-        Button(self.master, text="Clear", command=self.clear_fields).grid(row=2, column=3)
-        Button(self.master, text="Delete all", command=DeleteFrame(self.entries).delete_all).grid(row=3, column=3)
+        Button(self.master, text="Delete all", command=DeleteFrame(self.entries).delete_all).grid(row=2, column=3)
+        Button(self.master, text="Clear", command=self.clear_fields).grid(row=3, column=3)
 
     def fetch_record(self):
         self.open_shelve(self.shelvename)
