@@ -50,8 +50,6 @@ class UpdateFrame(DataBase):
             self.validator._field_empty_validator(self.update_key, field)
             self.validator._field_integer_validator(self.update_key, field, ['age', 'pay'])
             setattr(
-                record, field, dict(
-                    json.loads(str(self.entries.get()).replace("'", '"').replace('"{', '{').replace('}"', '}'))
-                )[self.update_key][field])
+                record, field, self.validator.entries[field])
         self._db[self.update_key] = record
         self.close_shelve()
