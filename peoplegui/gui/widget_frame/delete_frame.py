@@ -2,7 +2,7 @@ from tkinter import Button, Tk, Entry
 
 from accessify import private
 
-from app.gui.database.database import DataBase
+from peoplegui.gui.database.database import DataBase
 
 
 class DeleteFrame(DataBase):

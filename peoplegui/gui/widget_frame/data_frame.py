@@ -3,6 +3,7 @@ from tkinter import Entry, Tk, Button
 from tkinter.messagebox import showerror
 
 from peoplegui.gui.database.database import DataBase
+from peoplegui.gui.validator.validator import Validator
 
 
 class DataFrame(DataBase):

@@ -25,7 +25,6 @@ class Validator:
         entries = None
 
         def _field_empty_validator(self, key, field):
-            print(self.entries)
             if str(key).strip() == '':
                 showerror(title='error', message=f"'key' = {str(key) != ''} Empty field: 'field' = key")
                 raise ValueError(f"'key' = {str(key) != ''} Empty field: 'field' = key")
