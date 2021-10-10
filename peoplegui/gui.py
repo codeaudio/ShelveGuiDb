@@ -8,12 +8,14 @@ from class_person.person_start import Person
 from data_frame import DataFrame
 from database import DataBase
 from delete_frame import DeleteFrame
+from peoplegui.entries import Entries
 from validator import Validator
 
 
-class Gui(Validator, DataBase):
+class Gui(Validator, DataBase, Entries):
+
     def __init__(self):
-        self.entries = {}
+        super().__init__()
         self.master = Frame().master
         self.master.title('gui')
 

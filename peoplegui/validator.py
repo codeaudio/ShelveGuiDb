@@ -2,10 +2,10 @@ from tkinter.messagebox import showerror
 
 from accessify import protected
 
+from peoplegui.entries import Entries
 
-class Validator:
 
-    entries = None
+class Validator(Entries):
 
     @protected
     def _field_empty_validator(self, key, field):
