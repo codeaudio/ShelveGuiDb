@@ -2,8 +2,7 @@ import json
 from tkinter import Entry, Tk, Button
 from tkinter.messagebox import showerror
 
-from app.gui.database.database import DataBase
-from app.gui.validator.validator import Validator
+from peoplegui.gui.database.database import DataBase
 
 
 class DataFrame(DataBase):
