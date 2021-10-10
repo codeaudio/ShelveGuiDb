@@ -61,7 +61,7 @@ class Gui(DataBase):
         else:
             record = Person(name='?', age='?')
         for field in self.fieldnames:
-            self.validator._field_empty_validator(key, field)
+            self.validator._field_empty_validator(key, field, ['name', 'job'])
             self.validator._field_integer_validator(key, field, ['age', 'pay'])
             setattr(record, field, str(self.entries[field].get()))
         self._db[key] = record
@@ -89,7 +89,11 @@ class Gui(DataBase):
             elif field == 'age':
                 self.entries[field].insert(0, random.randint(0, 99))
             elif field == 'residence':
-                self.entries[field].insert(0, {'country': ''.join(random.choice('qwertyuiopas') for _ in range(6)), 'city': ''.join(random.choice('qwertyuiopas') for _ in range(6))})
+                self.entries[field].insert(
+                    0, {'country': ''.join(random.choice('qwertyuiopas')
+                                           for _ in range(6)), 'city': ''.join(random.choice('qwertyuiopas')
+                                                                               for _ in range(6))}
+                )
             else:
                 self.entries[field].insert(0, random.randint(0, 9999))
 

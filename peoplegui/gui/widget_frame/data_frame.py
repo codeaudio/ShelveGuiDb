@@ -49,7 +49,7 @@ class UpdateFrame(DataBase):
             showerror(title='error', message='incorrect data structure')
             raise Exception(e)
         for field in self.fieldnames:
-            self.validator._field_empty_validator(self.update_key, field)
+            self.validator._field_empty_validator(self.update_key, field, ['name', 'job'])
             self.validator._field_integer_validator(self.update_key, field, ['age', 'pay'])
             setattr(record, field, self.validator.entries[field])
         self._db[self.update_key] = record
