@@ -49,7 +49,6 @@ class UpdateFrame(DataBase):
         for field in self.fieldnames:
             self.validator._field_empty_validator(self.update_key, field)
             self.validator._field_integer_validator(self.update_key, field, ['age', 'pay'])
-            setattr(
-                record, field, self.validator.entries[field])
+            setattr(record, field, self.validator.entries[field])
         self._db[self.update_key] = record
         self.close_shelve()
