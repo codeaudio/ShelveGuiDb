@@ -23,7 +23,7 @@ class Gui(DataBase):
         self.make_root_master_buttons()
         for (ix, label) in enumerate(('key',) + self.fieldnames):
             self.master.lab = Label(self.master, text=label)
-            self.master.ent = Entry(self.master, width=55)
+            self.master.ent = Entry(self.master, width=50)
             self.master.lab.grid(row=ix, column=0)
             self.master.ent.grid(row=ix, column=1)
             self.entries[label] = self.master.ent
