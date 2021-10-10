@@ -2,6 +2,7 @@ from tkinter.messagebox import showerror
 
 
 class Validator:
+
     class EntriesValidator:
 
         entries = None
