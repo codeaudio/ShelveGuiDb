@@ -2,9 +2,7 @@ from tkinter.messagebox import showerror
 
 
 class Validator:
-
     class EntriesValidator:
-
         entries = None
 
         def _field_empty_validator(self, key, field):
@@ -21,7 +19,6 @@ class Validator:
                 raise ValueError(f"is not a number: {key, field}")
 
     class DictValidator:
-
         entries = None
 
         def _field_empty_validator(self, key, field):

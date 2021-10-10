@@ -12,7 +12,6 @@ from widget_frame.delete_frame import DeleteFrame
 
 
 class Gui(DataBase):
-
     def __init__(self):
         self.master = Frame().master
         self.master.title('gui')
