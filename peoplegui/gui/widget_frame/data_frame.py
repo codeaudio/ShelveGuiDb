@@ -41,7 +41,9 @@ class UpdateFrame(DataBase):
         record = self._db[self.update_key]
         try:
             self.validator.entries = dict(
-                json.loads(str(self.entries.get()).replace("'", '"').replace('"{', '{').replace('}"', '}'))
+                json.loads(str(self.entries.get())
+                           .replace("'", '"').replace('"{', '{').replace('}"', '}')
+                           .replace('"[', '[').replace(']"', ']'))
             ).get(self.update_key)
         except Exception as e:
             showerror(title='error', message='incorrect data structure')
