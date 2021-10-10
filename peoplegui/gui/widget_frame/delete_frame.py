@@ -23,7 +23,6 @@ class DeleteFrame(DataBase):
 
     def _accept_delete(self):
         self.open_shelve(self.shelvename)
-        for key in self._db.keys():
-            del self._db[key]
+        self._db.clear()
         self.close_shelve()
         self.master.destroy()
