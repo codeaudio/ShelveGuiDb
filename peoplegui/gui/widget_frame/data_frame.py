@@ -18,7 +18,7 @@ class DataFrame(DataBase):
         self.master = Tk()
         self.master.title("all data")
         for i, v in enumerate(self._db.items()):
-            self.master.i = Entry(self.master, width=100)
+            self.master.i = Entry(self.master, width=150)
             self.master.i.pack()
             self.entries[i] = self.master.i
             update = UpdateFrame()
@@ -40,13 +40,18 @@ class UpdateFrame(DataBase):
         self.open_shelve(self.shelvename)
         record = self._db[self.update_key]
         try:
-            self.validator.entries = dict(json.loads(str(self.entries.get()).replace("'", '"'))).get(self.update_key)
+            self.validator.entries = dict(
+                json.loads(str(self.entries.get()).replace("'", '"').replace('"{', '{').replace('}"', '}'))
+            ).get(self.update_key)
         except Exception as e:
             showerror(title='error', message='incorrect data structure')
             raise Exception(e)
         for field in self.fieldnames:
             self.validator._field_empty_validator(self.update_key, field)
             self.validator._field_integer_validator(self.update_key, field, ['age', 'pay'])
-            setattr(record, field, dict(json.loads(str(self.entries.get()).replace("'", '"')))[self.update_key][field])
+            setattr(
+                record, field, dict(
+                    json.loads(str(self.entries.get()).replace("'", '"').replace('"{', '{').replace('}"', '}'))
+                )[self.update_key][field])
         self._db[self.update_key] = record
         self.close_shelve()

@@ -31,10 +31,10 @@ class Gui(DataBase):
 
     @private
     def make_root_master_buttons(self):
-        Button(self.master, text="Fetch", command=self.fetch_record).grid(row=5, column=0)
-        Button(self.master, text="Update", command=self.update_record).grid(row=5, column=1)
-        Button(self.master, text="Quit", command=self.master.quit).grid(row=5, column=2)
-        Button(self.master, text="Delete", command=self.delete_record).grid(row=5, column=3)
+        Button(self.master, text="Fetch", command=self.fetch_record).grid(row=6, column=0)
+        Button(self.master, text="Update", command=self.update_record).grid(row=6, column=1)
+        Button(self.master, text="Quit", command=self.master.quit).grid(row=6, column=2)
+        Button(self.master, text="Delete", command=self.delete_record).grid(row=6, column=3)
         Button(self.master, text="Get data", command=DataFrame(self.entries).get_data).grid(row=0, column=3)
         Button(self.master, text="Generate", command=self.generate).grid(row=1, column=3)
         Button(self.master, text="Delete all", command=DeleteFrame(self.entries).delete_all).grid(row=2, column=3)
@@ -88,6 +88,8 @@ class Gui(DataBase):
                 self.entries[field].insert(0, ''.join(random.choice('qwertyuiopasdfghjklzxcvbnm') for _ in range(12)))
             elif field == 'age':
                 self.entries[field].insert(0, random.randint(0, 99))
+            elif field == 'residence':
+                self.entries[field].insert(0, {'country': ''.join(random.choice('qwertyuiopas') for _ in range(6)), 'city': ''.join(random.choice('qwertyuiopas') for _ in range(6))})
             else:
                 self.entries[field].insert(0, random.randint(0, 9999))
 
