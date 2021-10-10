@@ -5,19 +5,20 @@ from tkinter.messagebox import showerror
 from accessify import private
 
 from class_person.person_start import Person
-from data_frame import DataFrame
-from database import DataBase
-from delete_frame import DeleteFrame
-from peoplegui.entries import Entries
-from validator import Validator
+from database.database import DataBase
+from validator.validator import Validator
+from widget_frame.data_frame import DataFrame
+from widget_frame.delete_frame import DeleteFrame
 
 
-class Gui(Validator, DataBase, Entries):
+class Gui(DataBase):
 
     def __init__(self):
-        super().__init__()
         self.master = Frame().master
         self.master.title('gui')
+        self.entries = {}
+        self.validator = Validator.EntriesValidator()
+        self.validator.entries = self.entries
 
     def make_widgets(self):
         self.make_root_master_buttons()
@@ -61,7 +62,8 @@ class Gui(Validator, DataBase, Entries):
         else:
             record = Person(name='?', age='?')
         for field in self.fieldnames:
-            self._field_empty_validator(key, field), self._field_integer_validator(key, field, ['age', 'pay'])
+            self.validator._field_empty_validator(key, field)
+            self.validator._field_integer_validator(key, field, ['age', 'pay'])
             setattr(record, field, str(self.entries[field].get()))
         self._db[key] = record
         self.close_shelve()
