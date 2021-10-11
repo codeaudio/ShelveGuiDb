@@ -2,6 +2,8 @@ import json
 from tkinter import Entry, Tk, Button
 from tkinter.messagebox import showerror
 
+from accessify import private
+
 from peoplegui.gui.database.database import DataBase
 from peoplegui.gui.validator.validator import Validator
 
@@ -12,6 +14,10 @@ class DataFrame(DataBase):
 
     def __init__(self, entries):
         self.entries = entries
+
+    @private
+    def update_button(self, command):
+        Button(self.master, text="Update", command=command).pack()
 
     def get_data(self):
         self.open_shelve(self.shelvename)
@@ -25,7 +31,7 @@ class DataFrame(DataBase):
             update.update_key, update.entries, update.index = v[0], self.entries[i], i
             self.entries[i].insert(
                 i, ({v[0]: {field: str(getattr(v[1], field)) for field in self.fieldnames}},
-                    Button(self.master, text="Update", command=update.update_record).pack())[0]
+                    self.update_button(update.update_record))[0]
             )
         self.close_shelve()
 
@@ -40,7 +46,6 @@ class UpdateFrame(DataBase):
         self.open_shelve(self.shelvename)
         try:
             record = self._db[self.update_key]
-            print(record)
         except Exception as e:
             showerror(title='error', message='not found')
             raise Exception(e)
