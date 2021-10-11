@@ -61,7 +61,7 @@ class Gui(DataBase):
         else:
             record = Person(name='?', age='?')
         for field in self.fieldnames:
-            self.validator._field_empty_validator(key, field, ['name', 'job'])
+            self.validator._field_empty_validator(key, field, ['name', 'job', 'age', 'pay'])
             self.validator._field_integer_validator(key, field, ['age', 'pay'])
             setattr(record, field, str(self.entries[field].get()))
         self._db[key] = record
