@@ -63,7 +63,7 @@ class UpdateFrame(DataBase):
                 self.validator._field_empty_validator(self.update_key, field, ['name', 'job'])
                 self.validator._field_integer_validator(self.update_key, field, ['age', 'pay'])
                 setattr(record, field, self.validator.entries[field])
-            except Exception as e:
+            except TypeError as e:
                 showerror(title='error', message='not found')
                 raise Exception(e)
         self._db[self.update_key] = record
