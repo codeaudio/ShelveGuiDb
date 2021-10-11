@@ -40,6 +40,7 @@ class UpdateFrame(DataBase):
         self.open_shelve(self.shelvename)
         try:
             record = self._db[self.update_key]
+            print(record)
         except Exception as e:
             showerror(title='error', message='not found')
             raise Exception(e)
