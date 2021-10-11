@@ -15,6 +15,9 @@ class Validator:
                     raise ValueError(f"'key' = {key} Empty field: {field}")
 
         def _field_integer_validator(self, key, field, validate_field: list):
+            if not str(key).isdigit():
+                showerror(title='error', message=f"is not a number: 'key' = {key}, 'field' = key")
+                raise ValueError(f"is not a number: {key}")
             if field in validate_field and not str(self.entries[field].get()).strip().isdigit():
                 showerror(title='error', message=f"is not a number: 'key' = {key}, 'field' = {field}")
                 raise ValueError(f"is not a number: {key, field}")
