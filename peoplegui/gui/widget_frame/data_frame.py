@@ -38,7 +38,11 @@ class UpdateFrame(DataBase):
 
     def update_record(self):
         self.open_shelve(self.shelvename)
-        record = self._db[self.update_key]
+        try:
+            record = self._db[self.update_key]
+        except Exception as e:
+            showerror(title='error', message='not found')
+            raise Exception(e)
         try:
             self.validator.entries = dict(
                 json.loads(str(self.entries.get())
