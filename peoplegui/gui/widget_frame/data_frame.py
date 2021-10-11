@@ -65,6 +65,6 @@ class UpdateFrame(DataBase):
                 setattr(record, field, self.validator.entries[field])
             except TypeError as e:
                 showerror(title='error', message='not found')
-                raise Exception(e)
+                raise TypeError(e)
         self._db[self.update_key] = record
         self.close_shelve()
