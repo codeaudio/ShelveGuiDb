@@ -89,11 +89,10 @@ class Gui(DataBase):
             elif field == 'age':
                 self.entries[field].insert(0, random.randint(0, 99))
             elif field == 'residence':
-                self.entries[field].insert(
-                    0, {'country': ''.join(random.choice('qwertyuiopas')
-                                           for _ in range(6)), 'city': ''.join(random.choice('qwertyuiopas')
-                                                                               for _ in range(6))}
-                )
+                self.entries[field].insert(0, {
+                    'country': ''.join(random.choice('qwertyuiopas') for _ in range(6)),
+                    'city': ''.join(random.choice('qwertyuiopas') for _ in range(6))
+                })
             else:
                 self.entries[field].insert(0, random.randint(0, 9999))
 
