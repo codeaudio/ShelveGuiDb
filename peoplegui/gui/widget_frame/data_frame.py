@@ -60,9 +60,13 @@ class UpdateFrame(DataBase):
             raise Exception(e)
         for field in self.fieldnames:
             try:
-                self.validator._field_empty_validator(self.update_key, field, ['name', 'job'])
-                self.validator._field_integer_validator(self.update_key, field, ['age', 'pay'])
-                setattr(record, field, self.validator.entries[field])
+                try:
+                    self.validator._field_empty_validator(self.update_key, field, ['name', 'job'])
+                    self.validator._field_integer_validator(self.update_key, field, ['age', 'pay'])
+                    setattr(record, field, self.validator.entries[field])
+                except KeyError as e:
+                    showerror(title='error', message=f'key {e} not found')
+                    raise KeyError(e)
             except TypeError as e:
                 showerror(title='error', message='not found')
                 raise TypeError(e)
