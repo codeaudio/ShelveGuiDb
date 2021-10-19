@@ -6,8 +6,9 @@ from peoplegui.gui.database.database import DataBase
 
 
 class DeleteFrame(DataBase):
-    def __init__(self, entries):
+    def __init__(self, entries, master):
         self.entries = entries
+        self.parent_master = master
 
     @private
     def __accept_buttons(self):
@@ -25,4 +26,5 @@ class DeleteFrame(DataBase):
         self.open_shelve(self.shelvename)
         self._db.clear()
         self.close_shelve()
+        self.counter(self.parent_master)
         self.master.destroy()

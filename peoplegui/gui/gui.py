@@ -12,6 +12,8 @@ from widget_frame.delete_frame import DeleteFrame
 
 
 class Gui(DataBase):
+    fontsize = 0
+
     def __init__(self):
         self.master = Frame().master
         self.master.title('gui')
@@ -21,8 +23,10 @@ class Gui(DataBase):
 
     def make_widgets(self):
         self.make_root_master_buttons()
+        self.counter(self.master)
         for (ix, label) in enumerate(('key',) + self.fieldnames):
             self.master.lab = Label(self.master, text=label)
+            self.master.lab.config(font=('arial', 10))
             self.master.ent = Entry(self.master, width=50)
             self.master.lab.grid(row=ix, column=0)
             self.master.ent.grid(row=ix, column=1)
@@ -37,8 +41,15 @@ class Gui(DataBase):
         Button(self.master, text="Delete", command=self.delete_record).grid(row=6, column=3)
         Button(self.master, text="Get data", command=DataFrame(self.entries).get_data).grid(row=0, column=3)
         Button(self.master, text="Generate", command=self.generate).grid(row=1, column=3)
-        Button(self.master, text="Delete all", command=DeleteFrame(self.entries).delete_all).grid(row=2, column=3)
+        Button(self.master, text="Delete all", command=DeleteFrame(self.entries, self.master).delete_all).grid(row=2, column=3)
         Button(self.master, text="Clear", command=self.clear_fields).grid(row=3, column=3)
+        Button(self.master, text="Grow", command=self.on_grow).grid(row=4, column=3)
+
+    def on_grow(self):
+        self.fontsize -= 5
+        self.master.lab.config(font=('arial', self.fontsize, 'italic'))
+        self.master.after(10, self.on_grow)
+        self.master.lab.config(fg=random.choice(['red', 'green', 'blue', 'yellow', 'orange', 'cyan', 'purple']))
 
     def fetch_record(self):
         self.open_shelve(self.shelvename)
@@ -65,7 +76,7 @@ class Gui(DataBase):
             self.validator._field_integer_validator(key, field, ['age', 'pay'])
             setattr(record, field, str(self.entries[field].get()))
         self._db[key] = record
-        self.close_shelve()
+        self.counter(self.master)
 
     def delete_record(self):
         self.open_shelve(self.shelvename)
@@ -74,6 +85,7 @@ class Gui(DataBase):
             del self._db[key]
             self.clear_fields()
         self.close_shelve()
+        self.counter(self.master)
 
     def clear_fields(self):
         self.entries['key'].delete(0, END)
